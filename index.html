@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shoaib Asghar — AI/ML Engineer &amp; Backend Developer</title>
-<meta name="description" content="Shoaib Asghar is an AI/ML engineer and backend developer specializing in LLM-powered RAG pipelines, AI agents, and production REST APIs with Django, FastAPI, and LangChain.">
+<meta name="description" content="Shoaib Asghar is an AI/ML engineer and backend developer specializing in LLM-powered RAG pipelines, LangGraph AI agents with human-in-the-loop guardrails, and production REST APIs with Django, FastAPI, and LangChain.">
 <meta name="keywords" content="Shoaib Asghar, AI ML Engineer, Backend Developer, Python Developer, Django, FastAPI, RAG, LangChain, LLM Engineer, Software Engineer Pakistan">
 <meta name="author" content="Shoaib Asghar">
 <meta name="robots" content="index, follow">
@@ -370,9 +370,35 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
 /* ===================== 404 (for standalone page reuse, shared classnames) ===================== */
 .notfound{min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; flex-direction:column; padding:40px;}
 .notfound .code{font-family:var(--ff-display); font-size:clamp(70px,16vw,160px); color:var(--copper); line-height:1;}
+
+/* ===================== PRO POLISH ===================== */
+#progress{position:fixed; top:0; left:0; height:3px; width:0; z-index:1000; background:linear-gradient(90deg,var(--copper),var(--teal)); transition:width .1s linear;}
+.hero-glow{position:absolute; width:520px; height:520px; right:-120px; top:-60px; border-radius:50%; pointer-events:none; z-index:-1;
+  background:radial-gradient(circle, color-mix(in srgb, var(--teal) 22%, transparent), transparent 65%); filter:blur(30px); animation:float 9s ease-in-out infinite alternate;}
+.hero::before{content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:56px 56px; mask-image:radial-gradient(ellipse at 30% 30%, #000 20%, transparent 70%); -webkit-mask-image:radial-gradient(ellipse at 30% 30%, #000 20%, transparent 70%);}
+@keyframes float{to{transform:translate(-30px,40px) scale(1.08);}}
+.hero h1 span{background:linear-gradient(90deg,var(--copper),var(--teal)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.section-title{position:relative;}
+.pcard{position:relative; overflow:hidden;}
+.pcard::after{content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s;
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%), color-mix(in srgb, var(--copper) 14%, transparent), transparent 60%);}
+.pcard:hover::after{opacity:1;}
+.pcard.featured{grid-column:span 2; border-color:var(--line-strong); background:linear-gradient(160deg,var(--panel),var(--panel-2));}
+.pcard.featured::before{content:"★ Featured"; position:absolute; top:0; right:0; font-family:var(--ff-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  padding:6px 14px; background:var(--copper); color:#0B0F17; border-bottom-left-radius:10px; font-weight:600;}
+.pcard.featured h4{font-size:21px; padding-right:90px;}
+.pcard.featured p{font-size:14.5px;}
+@media (max-width:800px){.pcard.featured{grid-column:span 1;}}
+.pcard .plinks a:hover{background:color-mix(in srgb, var(--copper) 10%, transparent);}
+.skill-card, .about-card, .ach-card, .stack-item{transition:.3s;}
+.skill-card:hover, .about-card:hover, .ach-card:hover{border-color:var(--line-strong); transform:translateY(-3px); box-shadow:var(--shadow);}
+.chip{transition:.2s;} .chip:hover{color:var(--teal); border-color:var(--teal);}
 </style>
 </head>
 <body>
+<div id="progress" aria-hidden="true"></div>
 
 <div id="loader">
   <svg class="loader-mark" viewBox="0 0 100 100" fill="none">
@@ -423,11 +449,12 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <a href="./Shoaib_Asghar_Resume.pdf" download class="btn btn-ghost">Download Resume ↓</a>
         </div>
         <div class="hero-stats">
-          <div class="hero-stat"><b>2</b><span>AI/ML Internships</span></div>
-          <div class="hero-stat"><b>9</b><span>Shipped Projects</span></div>
-          <div class="hero-stat"><b>200+</b><span>LeetCode Problems Solved</span></div>
+          <div class="hero-stat"><b data-count="2">2</b><span>AI/ML Internships</span></div>
+          <div class="hero-stat"><b data-count="14">14</b><span>Shipped Projects</span></div>
+          <div class="hero-stat"><b data-count="200" data-suffix="+">200+</b><span>LeetCode Problems Solved</span></div>
         </div>
       </div>
+      <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-visual">
         <svg class="route-svg" viewBox="0 0 400 480" aria-hidden="true">
           <path class="route-path" d="M20 420 Q 90 380 60 300 T 140 200 Q 200 140 260 160 T 380 60"/>
@@ -595,7 +622,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
     <div class="wrap">
       <div class="eyebrow reveal">Selected Work</div>
       <h2 class="section-title reveal">Projects</h2>
-      <p class="section-sub reveal">Filter by stack to see how the same backend instincts apply across domains.</p>
+      <p class="section-sub reveal">Featured builds first. Filter by stack, or jump straight to projects with a live demo.</p>
 
       <div class="filter-row reveal">
         <button class="filter-btn active" data-filter="all">All</button>
@@ -605,22 +632,13 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
         <button class="filter-btn" data-filter="CV">Computer Vision</button>
         <button class="filter-btn" data-filter="Node">Node.js</button>
         <button class="filter-btn" data-filter="Blockchain">Blockchain</button>
+        <button class="filter-btn" data-filter="React">React</button>
+        <button class="filter-btn" data-filter="Live">Live Demos</button>
       </div>
 
       <div class="projects-grid" id="projectsGrid">
 
-        <article class="pcard" data-tags="Django">
-          <div class="pcard-top">
-            <h4>Fuel Route Optimizer</h4>
-            <div class="plinks">
-              <a href="https://github.com/Shoaib-1234" target="_blank" rel="noopener" aria-label="View source on GitHub"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.35-3.87-1.35-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.2 1.18a11 11 0 0 1 5.82 0c2.22-1.5 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.68 5.4-5.24 5.69.42.36.78 1.08.78 2.17v3.22c0 .3.2.65.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
-            </div>
-          </div>
-          <p>A production-grade RESTful API in Django REST Framework that geocodes multi-stop itineraries, queries OpenRouteService for optimal routes, and computes cost savings — with caching middleware for repeated queries and robust handling of API rate limits.</p>
-          <div class="tl-tech"><span class="chip">Django 5</span><span class="chip">DRF</span><span class="chip">OpenRouteService</span><span class="chip">Geopy</span><span class="chip">Pandas</span></div>
-        </article>
-
-        <article class="pcard" data-tags="AI Django">
+<article class="pcard featured" data-tags="AI Django">
           <div class="pcard-top">
             <h4>CLARA — Enterprise RAG Assistant</h4>
             <div class="plinks">
@@ -631,7 +649,53 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">ChromaDB</span><span class="chip">OpenRouter</span></div>
         </article>
 
-        <article class="pcard" data-tags="CV">
+<article class="pcard featured" data-tags="AI">
+  <div class="pcard-top">
+    <h4>Ops Assistant Agent</h4>
+    <div class="plinks">
+      <a href="https://github.com/Shoaib-1234" target="_blank" rel="noopener" aria-label="View source on GitHub"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.35-3.87-1.35-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.2 1.18a11 11 0 0 1 5.82 0c2.22-1.5 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.68 5.4-5.24 5.69.42.36.78 1.08.78 2.17v3.22c0 .3.2.65.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+    </div>
+  </div>
+  <p>An orchestrated, production-grade AI operations assistant that answers SOP questions, queries structured database records, performs financial calculations, and drafts email communications. Backed by conversation memory, enterprise guardrails, and a mandatory Human-in-the-Loop approval step before any sensitive action.</p>
+  <div class="tl-tech"><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">Pydantic</span><span class="chip">OpenAI</span><span class="chip">Human-in-the-Loop</span></div>
+</article>
+
+<article class="pcard featured" data-tags="AI">
+  <div class="pcard-top">
+    <h4>DocuChat — Policy &amp; Compliance RAG</h4>
+    <div class="plinks">
+      <a href="https://github.com/Shoaib-1234" target="_blank" rel="noopener" aria-label="View source on GitHub"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.35-3.87-1.35-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.2 1.18a11 11 0 0 1 5.82 0c2.22-1.5 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.68 5.4-5.24 5.69.42.36.78 1.08.78 2.17v3.22c0 .3.2.65.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+    </div>
+  </div>
+  <p>An end-to-end production RAG system for chatting with company policies, compliance documents, and corporate knowledge bases. Features grounded prompt engineering, verifiable inline source citations, strict refusal on out-of-domain queries, and seamless swapping between Supabase pgvector (hosted) and FAISS (local fallback).</p>
+  <div class="tl-tech"><span class="chip">RAG</span><span class="chip">Supabase pgvector</span><span class="chip">FAISS</span><span class="chip">Citations</span><span class="chip">Prompt Engineering</span></div>
+</article>
+
+<article class="pcard featured" data-tags="Django React Live">
+  <div class="pcard-top">
+    <h4>SafeHaul RouteIQ — Weather-Aware Truck Routing</h4>
+    <div class="plinks">
+      <a href="https://github.com/shoaib980-make/Weather-Aware-Truck-Routing" target="_blank" rel="noopener" aria-label="View source on GitHub"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.35-3.87-1.35-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.2 1.18a11 11 0 0 1 5.82 0c2.22-1.5 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.68 5.4-5.24 5.69.42.36.78 1.08.78 2.17v3.22c0 .3.2.65.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+      <a href="https://safehaul-routeiq-frontend.vercel.app" target="_blank" rel="noopener" aria-label="Open live demo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg></a>
+      <a href="https://drive.google.com/file/d/1jxoH_JW4qlNgZO08e7LgUi029A-aQa60/view?usp=sharing" target="_blank" rel="noopener" aria-label="Watch walkthrough video"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></a>
+    </div>
+  </div>
+  <p>A production-grade logistics safety app (React + Django) that evaluates three alternative driving routes against weather forecasts sampled at the exact projected time a truck reaches each checkpoint, then ranks and recommends the safest corridor. Runs with no API keys: OSRM for routing, Open-Meteo for weather, and Nominatim for geocoding with automatic Open-Meteo fallback.</p>
+  <div class="tl-tech"><span class="chip">React</span><span class="chip">Django</span><span class="chip">OSRM</span><span class="chip">Open-Meteo</span><span class="chip">Nominatim</span></div>
+</article>
+
+<article class="pcard" data-tags="Django">
+          <div class="pcard-top">
+            <h4>Fuel Route Optimizer</h4>
+            <div class="plinks">
+              <a href="https://github.com/Shoaib-1234" target="_blank" rel="noopener" aria-label="View source on GitHub"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.35-3.87-1.35-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.2 1.18a11 11 0 0 1 5.82 0c2.22-1.5 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.68 5.4-5.24 5.69.42.36.78 1.08.78 2.17v3.22c0 .3.2.65.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+            </div>
+          </div>
+          <p>A production-grade RESTful API in Django REST Framework that geocodes multi-stop itineraries, queries OpenRouteService for optimal routes, and computes cost savings — with caching middleware for repeated queries and robust handling of API rate limits.</p>
+          <div class="tl-tech"><span class="chip">Django 5</span><span class="chip">DRF</span><span class="chip">OpenRouteService</span><span class="chip">Geopy</span><span class="chip">Pandas</span></div>
+        </article>
+
+<article class="pcard" data-tags="CV">
           <div class="pcard-top">
             <h4>Smart Driver Assistant App (Final Year Project)</h4>
             <div class="plinks">
@@ -642,7 +706,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">YOLOv8</span><span class="chip">Raspberry Pi</span><span class="chip">Computer Vision</span><span class="chip">NumPy</span></div>
         </article>
 
-        <article class="pcard" data-tags="AI">
+<article class="pcard" data-tags="AI">
           <div class="pcard-top">
             <h4>Facial Expression Recognition Network</h4>
             <div class="plinks">
@@ -653,7 +717,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">Python</span><span class="chip">Neural Networks</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">OpenCV</span></div>
         </article>
 
-        <article class="pcard" data-tags="Node">
+<article class="pcard" data-tags="Node React">
           <div class="pcard-top">
             <h4>Airbnb Clone Web Application</h4>
             <div class="plinks">
@@ -664,7 +728,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip">Tailwind CSS</span><span class="chip">Express.js</span></div>
         </article>
 
-        <article class="pcard" data-tags="Blockchain">
+<article class="pcard" data-tags="Blockchain">
           <div class="pcard-top">
             <h4>Confidential Survey App (Blockchain)</h4>
             <div class="plinks">
@@ -675,7 +739,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">Solidity</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Zero-Knowledge Proofs</span><span class="chip">Ethereum</span></div>
         </article>
 
-        <article class="pcard" data-tags="FastAPI">
+<article class="pcard" data-tags="FastAPI">
           <div class="pcard-top">
             <h4>Kanban Task Management System</h4>
             <div class="plinks">
@@ -686,7 +750,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span></div>
         </article>
 
-        <article class="pcard" data-tags="FastAPI">
+<article class="pcard" data-tags="FastAPI React">
           <div class="pcard-top">
             <h4>Hotel Management System</h4>
             <div class="plinks">
@@ -697,7 +761,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">PostgreSQL</span><span class="chip">JWT Authentication</span></div>
         </article>
 
-        <article class="pcard" data-tags="AI">
+<article class="pcard" data-tags="AI">
           <div class="pcard-top">
             <h4>AI Debate Chamber</h4>
             <div class="plinks">
@@ -708,6 +772,27 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
           <div class="tl-tech"><span class="chip">Python</span><span class="chip">Ollama API</span><span class="chip">LLMs</span><span class="chip">AI Agents</span><span class="chip">Random Forest</span></div>
         </article>
 
+<article class="pcard" data-tags="AI Node Live">
+  <div class="pcard-top">
+    <h4>Smart Extractor Chat Service</h4>
+    <div class="plinks">
+      <a href="https://smart-extractor-chat-service-t43b.vercel.app/" target="_blank" rel="noopener" aria-label="Open live demo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg></a>
+    </div>
+  </div>
+  <p>An end-to-end full-stack AI platform that uses LLMs to deliver real-time, token-streaming conversational assistance alongside automated, schema-validated structured information extraction from arbitrary natural-language text.</p>
+  <div class="tl-tech"><span class="chip">LLMs</span><span class="chip">Token Streaming</span><span class="chip">Structured Extraction</span><span class="chip">Schema Validation</span><span class="chip">Vercel</span></div>
+</article>
+
+<article class="pcard" data-tags="Node FastAPI React Live">
+  <div class="pcard-top">
+    <h4>TaskTrack — Full-Stack Task Manager</h4>
+    <div class="plinks">
+      <a href="https://task-track-app-inky.vercel.app/" target="_blank" rel="noopener" aria-label="Open live demo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg></a>
+    </div>
+  </div>
+  <p>A full-stack task management app where users register, log in, and manage personal tasks through a React frontend and a REST API. Includes bcrypt password hashing, JWT-protected routes, user-specific tasks, status filtering, PUT/PATCH updates, and validation, persisted in MongoDB Atlas. A companion FastAPI service with Pydantic validation and auto-generated docs covers my API learning track.</p>
+  <div class="tl-tech"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">MongoDB Atlas</span><span class="chip">JWT</span><span class="chip">FastAPI</span></div>
+</article>
       </div>
     </div>
   </section>
@@ -717,7 +802,7 @@ footer{border-top:1px solid var(--line); padding:44px 0; margin-top:40px;}
     <div class="wrap">
       <div class="eyebrow reveal">Credentials</div>
       <h2 class="section-title reveal">Certifications</h2>
-      <p class="section-sub reveal">Currently building toward formal credentials in cloud infrastructure and applied ML.</p>
+      <p class="section-sub reveal">Formal learning, backed by shipped production work.</p>
       <div class="ach-grid reveal-stagger">
         <div class="ach-card">
           <div class="num">🎓</div>
@@ -1004,6 +1089,29 @@ form.addEventListener('submit', (e) => {
 
 /* ---------- Footer year ---------- */
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- Scroll progress ---------- */
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  bar.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+}, {passive:true});
+
+/* ---------- Card spotlight ---------- */
+document.querySelectorAll('.pcard').forEach(c => c.addEventListener('mousemove', e => {
+  const r = c.getBoundingClientRect();
+  c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+  c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+}));
+
+/* ---------- Animated hero counters ---------- */
+document.querySelectorAll('[data-count]').forEach(el => {
+  const target = +el.dataset.count, suffix = el.dataset.suffix || '';
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent = target + suffix; return; }
+  let n = 0; const step = Math.max(1, Math.ceil(target / 40));
+  el.textContent = '0' + suffix;
+  const t = setInterval(() => { n = Math.min(target, n + step); el.textContent = n + suffix; if(n >= target) clearInterval(t); }, 35);
+});
 </script>
 </body>
 </html>
